@@ -37,12 +37,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     ...authConfig.callbacks,
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user?.id) token.sub = user.id;
+      // Client calls update({ name, image }) after a profile edit so the
+      // sidebar/avatar reflect it immediately, without a fresh login — the
+      // JWT otherwise only carries the snapshot taken at sign-in time.
+      if (trigger === "update" && session) {
+        if (typeof session.name === "string") token.name = session.name;
+        if (typeof session.image === "string") token.picture = session.image;
+      }
       return token;
     },
     async session({ session, token }) {
       if (session.user && token.sub) session.user.id = token.sub;
+      if (session.user && typeof token.name === "string") session.user.name = token.name;
+      if (session.user && typeof token.picture === "string") session.user.image = token.picture;
       return session;
     },
   },

@@ -21,7 +21,7 @@ export function PipelineBreakdownChart({ applications }: { applications: JobAppl
 
   if (rows.length === 0) {
     return (
-      <div className="flex h-full min-h-[180px] items-center justify-center text-sm text-gray-400">
+      <div className="flex h-full min-h-[180px] items-center justify-center text-sm text-stone-400">
         No active applications right now.
       </div>
     );
@@ -41,8 +41,8 @@ export function PipelineBreakdownChart({ applications }: { applications: JobAppl
           role="img"
           aria-label={`${row.status}: ${row.count} application${row.count === 1 ? "" : "s"}`}
         >
-          <span className="w-28 shrink-0 truncate text-sm text-gray-600">{row.status}</span>
-          <div className="relative h-4 flex-1 rounded-sm bg-gray-100">
+          <span className="w-28 shrink-0 truncate text-sm text-stone-600">{row.status}</span>
+          <div className="relative h-4 flex-1 rounded-sm bg-stone-100">
             <div
               className="h-4 rounded-sm transition-[filter] duration-100"
               style={{
@@ -52,7 +52,7 @@ export function PipelineBreakdownChart({ applications }: { applications: JobAppl
               }}
             />
           </div>
-          <span className="w-6 shrink-0 text-right text-sm font-medium tabular-nums text-gray-900">
+          <span className="w-6 shrink-0 text-right text-sm font-medium tabular-nums text-stone-900">
             {row.count}
           </span>
         </div>

@@ -35,7 +35,7 @@ export function ApplicationsOverTimeChart({ applications }: { applications: JobA
   return (
     <div className="relative">
       {hovered !== null && (
-        <div className="pointer-events-none absolute -top-8 left-0 right-0 text-center text-xs text-gray-500">
+        <div className="pointer-events-none absolute -top-8 left-0 right-0 text-center text-xs text-stone-500">
           Week of {weekLabel(buckets[hovered].start)} — {buckets[hovered].count} application
           {buckets[hovered].count === 1 ? "" : "s"}
         </div>
@@ -56,7 +56,7 @@ export function ApplicationsOverTimeChart({ applications }: { applications: JobA
               role="img"
               aria-label={`Week of ${weekLabel(bucket.start)}: ${bucket.count} applications`}
             >
-              {showLabel && <span className="text-xs font-medium tabular-nums text-gray-700">{bucket.count}</span>}
+              {showLabel && <span className="text-xs font-medium tabular-nums text-stone-700">{bucket.count}</span>}
               <div
                 className="w-full max-w-[28px] rounded-t transition-[filter] duration-100"
                 style={{
@@ -71,7 +71,7 @@ export function ApplicationsOverTimeChart({ applications }: { applications: JobA
       </div>
       <div className="mt-2 flex gap-2">
         {buckets.map((bucket) => (
-          <span key={bucket.start.toISOString()} className="flex-1 text-center text-[10px] text-gray-400">
+          <span key={bucket.start.toISOString()} className="flex-1 text-center text-[10px] text-stone-400">
             {weekLabel(bucket.start)}
           </span>
         ))}

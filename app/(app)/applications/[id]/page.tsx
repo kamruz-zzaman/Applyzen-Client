@@ -41,13 +41,13 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
   }
 
   if (!application) {
-    return <div className="mx-auto max-w-3xl px-4 py-8 text-sm text-gray-500">Loading…</div>;
+    return <div className="mx-auto max-w-3xl px-4 py-8 text-sm text-stone-500">Loading…</div>;
   }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-semibold tracking-tight text-gray-900">
+        <h1 className="text-xl font-semibold tracking-tight text-stone-900">
           {application.jobTitle} @ {application.companyName}
         </h1>
         <button
@@ -58,7 +58,7 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
           {deleting ? "Deleting..." : "Delete"}
         </button>
       </div>
-      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-stone-200 bg-white p-6">
         <JobApplicationForm initial={application} onSubmit={handleSubmit} submitLabel="Save Changes" />
       </div>
     </div>

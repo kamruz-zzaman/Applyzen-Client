@@ -79,12 +79,12 @@ export default function ApplicationsPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 sm:px-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Applications</h1>
-          <p className="mt-1 text-sm text-gray-500">Search, filter, and manage every application.</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-stone-900">Applications</h1>
+          <p className="mt-1 text-sm text-stone-500">Search, filter, and manage every application.</p>
         </div>
-        <Link href="/applications/new" className="btn-primary">
+        <Link href="/applications/new" className="btn-primary self-start whitespace-nowrap sm:self-auto">
           + Add Application
         </Link>
       </div>
@@ -114,11 +114,11 @@ export default function ApplicationsPage() {
           </select>
         </div>
 
-        <div className="flex rounded-lg border border-gray-300 bg-white p-0.5">
+        <div className="flex rounded-lg border border-stone-300 bg-white p-0.5">
           <button
             onClick={() => setView("table")}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium ${
-              view === "table" ? "bg-gray-900 text-white" : "text-gray-600 hover:bg-gray-50"
+              view === "table" ? "bg-stone-900 text-white" : "text-stone-600 hover:bg-stone-50"
             }`}
           >
             <Table2 className="h-4 w-4" />
@@ -127,7 +127,7 @@ export default function ApplicationsPage() {
           <button
             onClick={() => setView("board")}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium ${
-              view === "board" ? "bg-gray-900 text-white" : "text-gray-600 hover:bg-gray-50"
+              view === "board" ? "bg-stone-900 text-white" : "text-stone-600 hover:bg-stone-50"
             }`}
           >
             <LayoutGrid className="h-4 w-4" />
@@ -137,11 +137,11 @@ export default function ApplicationsPage() {
       </div>
 
       {loading ? (
-        <div className="py-12 text-center text-sm text-gray-500">Loading…</div>
+        <div className="py-12 text-center text-sm text-stone-500">Loading…</div>
       ) : sorted.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white py-16">
-          <FolderOpen className="h-8 w-8 text-gray-300" />
-          <p className="text-sm text-gray-500">No applications yet.</p>
+        <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-stone-200 bg-white py-16">
+          <FolderOpen className="h-8 w-8 text-stone-300" />
+          <p className="text-sm text-stone-500">No applications yet.</p>
           <Link href="/applications/new" className="btn-primary">
             + Add Application
           </Link>
@@ -149,9 +149,9 @@ export default function ApplicationsPage() {
       ) : view === "board" ? (
         <KanbanBoard applications={sorted} onStatusChange={handleStatusChange} />
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-50">
+        <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
+          <table className="min-w-full divide-y divide-stone-200 text-sm">
+            <thead className="bg-stone-50">
               <tr>
                 <SortableTh label="Company" sortKey="companyName" active={sortKey} dir={sortDir} onClick={toggleSort} />
                 <SortableTh label="Role" sortKey="jobTitle" active={sortKey} dir={sortDir} onClick={toggleSort} />
@@ -163,9 +163,9 @@ export default function ApplicationsPage() {
                 <Th />
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-stone-100">
               {sorted.map((app) => (
-                <tr key={app._id} className="group hover:bg-gray-50">
+                <tr key={app._id} className="group hover:bg-stone-50">
                   <td className="px-4 py-3">
                     <Link href={`/applications/${app._id}`} className="flex items-center gap-2.5">
                       <span
@@ -173,23 +173,23 @@ export default function ApplicationsPage() {
                       >
                         {initials(app.companyName)}
                       </span>
-                      <span className="font-medium text-gray-900 hover:underline">{app.companyName}</span>
+                      <span className="font-medium text-stone-900 hover:underline">{app.companyName}</span>
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-gray-700">{app.jobTitle}</td>
-                  <td className="px-4 py-3 text-gray-700">{app.companyLocation || "—"}</td>
-                  <td className="px-4 py-3 text-gray-700">{new Date(app.dateApplied).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 text-stone-700">{app.jobTitle}</td>
+                  <td className="px-4 py-3 text-stone-700">{app.companyLocation || "—"}</td>
+                  <td className="px-4 py-3 text-stone-700">{new Date(app.dateApplied).toLocaleDateString()}</td>
                   <td className="px-4 py-3">
                     <StatusBadge status={app.status} />
                   </td>
-                  <td className="px-4 py-3 text-gray-700">{formatSalary(app)}</td>
-                  <td className="px-4 py-3 text-gray-700">
+                  <td className="px-4 py-3 text-stone-700">{formatSalary(app)}</td>
+                  <td className="px-4 py-3 text-stone-700">
                     {app.proposedSalary ? `${app.salaryCurrency} ${app.proposedSalary.toLocaleString()}` : "—"}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <button
                       onClick={() => handleDelete(app._id)}
-                      className="invisible rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-600 group-hover:visible"
+                      className="invisible rounded-md p-1.5 text-stone-400 hover:bg-red-50 hover:text-red-600 group-hover:visible"
                       title="Delete"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -207,7 +207,7 @@ export default function ApplicationsPage() {
 
 function Th({ children }: { children?: React.ReactNode }) {
   return (
-    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{children}</th>
+    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">{children}</th>
   );
 }
 
@@ -228,7 +228,7 @@ function SortableTh({
   return (
     <th
       onClick={() => onClick(sortKey)}
-      className="cursor-pointer select-none px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 hover:text-gray-700"
+      className="cursor-pointer select-none px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-stone-500 hover:text-stone-700"
     >
       {label}
       {isActive && <span className="ml-1">{dir === "asc" ? "↑" : "↓"}</span>}

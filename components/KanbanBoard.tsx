@@ -31,21 +31,21 @@ function KanbanCard({ app }: { app: JobApplication }) {
       style={
         transform ? { transform: `translate(${transform.x}px, ${transform.y}px)`, zIndex: 10 } : undefined
       }
-      className={`cursor-grab space-y-1.5 rounded-lg border border-gray-200 bg-white p-3 shadow-sm active:cursor-grabbing ${
+      className={`cursor-grab space-y-1.5 rounded-lg border border-stone-200 bg-white p-3 active:cursor-grabbing ${
         isDragging ? "opacity-40" : ""
       }`}
     >
-      <p className="truncate text-sm font-medium text-gray-900">{app.companyName}</p>
-      <p className="truncate text-xs text-gray-500">{app.jobTitle}</p>
+      <p className="truncate text-sm font-medium text-stone-900">{app.companyName}</p>
+      <p className="truncate text-xs text-stone-500">{app.jobTitle}</p>
       <div className="flex items-center justify-between pt-1">
         {app.proposedSalary ? (
-          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-600">
+          <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[11px] text-stone-600">
             {app.salaryCurrency} {app.proposedSalary.toLocaleString()}
           </span>
         ) : (
           <span />
         )}
-        <span className="text-[11px] text-gray-400">{daysAgo(app.dateApplied)}</span>
+        <span className="text-[11px] text-stone-400">{daysAgo(app.dateApplied)}</span>
       </div>
     </div>
   );
@@ -58,12 +58,12 @@ function KanbanColumn({ status, apps }: { status: ApplicationStatus; apps: JobAp
     <div
       ref={setNodeRef}
       className={`flex w-64 shrink-0 flex-col rounded-xl border p-2 ${
-        isOver ? "border-indigo-300 bg-indigo-50/40" : "border-gray-200 bg-gray-50"
+        isOver ? "border-amber-300 bg-amber-50/40" : "border-stone-200 bg-stone-50"
       }`}
     >
       <div className="flex items-center justify-between px-2 py-1.5">
-        <span className="text-xs font-semibold text-gray-700">{status}</span>
-        <span className="text-xs text-gray-400">{apps.length}</span>
+        <span className="text-xs font-semibold text-stone-700">{status}</span>
+        <span className="text-xs text-stone-400">{apps.length}</span>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto px-1 py-1" style={{ minHeight: 40 }}>
         {apps.map((app) => (

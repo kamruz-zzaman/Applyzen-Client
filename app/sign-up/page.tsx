@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState, type FormEvent } from "react";
 import { OAuthButtons } from "@/components/AuthProviderButtons";
+import { Logo } from "@/components/Logo";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -41,20 +42,20 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-gray-50 px-4 py-12">
-      <Link href="/" className="mb-8 text-lg font-semibold tracking-tight text-gray-900">
-        Job Application Tracker
+    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-stone-50 px-4 py-12">
+      <Link href="/" className="mb-8">
+        <Logo />
       </Link>
 
-      <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-        <h1 className="mb-6 text-center text-xl font-semibold text-gray-900">Create an account</h1>
+      <div className="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-8">
+        <h1 className="mb-6 text-center text-xl font-semibold text-stone-900">Create an account</h1>
 
         <OAuthButtons />
 
-        <div className="my-6 flex items-center gap-3 text-xs text-gray-400">
-          <div className="h-px flex-1 bg-gray-200" />
+        <div className="my-6 flex items-center gap-3 text-xs text-stone-400">
+          <div className="h-px flex-1 bg-stone-200" />
           or
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 bg-stone-200" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -91,9 +92,9 @@ export default function SignUpPage() {
         </form>
       </div>
 
-      <p className="mt-6 text-center text-sm text-gray-500">
+      <p className="mt-6 text-center text-sm text-stone-500">
         Already have an account?{" "}
-        <Link href="/sign-in" className="font-medium text-indigo-600 hover:text-indigo-500">
+        <Link href="/sign-in" className="font-medium text-amber-600 hover:text-amber-500">
           Sign in
         </Link>
       </p>

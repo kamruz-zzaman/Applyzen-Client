@@ -54,7 +54,7 @@ export function AttentionWidget({ applications }: { applications: JobApplication
     return (
       <div className="flex h-full min-h-[140px] flex-col items-center justify-center gap-2 text-center">
         <CheckCircle2 className="h-6 w-6 text-emerald-500" />
-        <p className="text-sm text-gray-500">Nothing due in the next {WINDOW_DAYS} days.</p>
+        <p className="text-sm text-stone-500">Nothing due in the next {WINDOW_DAYS} days.</p>
       </div>
     );
   }
@@ -67,17 +67,17 @@ export function AttentionWidget({ applications }: { applications: JobApplication
           <li key={`${item.applicationId}-${item.label}-${i}`}>
             <Link
               href={`/applications/${item.applicationId}`}
-              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 hover:bg-gray-50"
+              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 hover:bg-stone-50"
             >
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-gray-900">
+                <p className="truncate text-sm font-medium text-stone-900">
                   {item.label} — {item.companyName}
                 </p>
-                <p className="truncate text-xs text-gray-500">{item.jobTitle}</p>
+                <p className="truncate text-xs text-stone-500">{item.jobTitle}</p>
               </div>
               <span
                 className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
-                  due.overdue ? "bg-red-50 text-red-700" : "bg-gray-100 text-gray-600"
+                  due.overdue ? "bg-red-50 text-red-700" : "bg-stone-100 text-stone-600"
                 }`}
               >
                 {due.text}

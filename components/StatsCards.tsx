@@ -20,7 +20,7 @@ export function StatsCards({ stats, applications }: { stats: StatsResponse; appl
       value: stats.total,
       delta: thisWeek > 0 ? `+${thisWeek} this week` : undefined,
       icon: Briefcase,
-      color: "bg-indigo-50 text-indigo-600",
+      color: "bg-amber-50 text-amber-600",
     },
     { label: "Active", value: active, icon: TrendingUp, color: "bg-blue-50 text-blue-600" },
     { label: "Offers", value: offers, icon: Award, color: "bg-emerald-50 text-emerald-600" },
@@ -30,13 +30,13 @@ export function StatsCards({ stats, applications }: { stats: StatsResponse; appl
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       {cards.map((card) => (
-        <div key={card.label} className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+        <div key={card.label} className="rounded-xl border border-stone-200 bg-white p-4">
           <div className={`mb-2 flex h-8 w-8 items-center justify-center rounded-lg ${card.color}`}>
             <card.icon className="h-4 w-4" />
           </div>
-          <p className="text-sm text-gray-500">{card.label}</p>
+          <p className="text-sm text-stone-500">{card.label}</p>
           <div className="mt-1 flex items-baseline gap-2">
-            <p className="text-2xl font-semibold text-gray-900">{card.value}</p>
+            <p className="text-2xl font-semibold text-stone-900">{card.value}</p>
             {card.delta && <span className="text-xs font-medium text-emerald-600">{card.delta}</span>}
           </div>
         </div>

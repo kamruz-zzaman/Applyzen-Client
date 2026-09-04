@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Job Application Tracker",
+  title: "Applyzen",
   description: "Track jobs you've applied to — company, salary, contacts, and status.",
 };
 

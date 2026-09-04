@@ -18,6 +18,7 @@ export async function GET() {
   return NextResponse.json({
     name: user?.name ?? "",
     email: user?.email ?? session.user.email,
+    image: user?.image ?? null,
     hasPassword: Boolean(user?.passwordHash),
     providers,
     passkeys,

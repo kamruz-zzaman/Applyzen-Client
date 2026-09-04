@@ -33,6 +33,11 @@ export async function updateUserName(userId: string, name: string) {
   await users.updateOne({ _id: new ObjectId(userId) }, { $set: { name } });
 }
 
+export async function updateUserImage(userId: string, image: string) {
+  const users = await usersCollection();
+  await users.updateOne({ _id: new ObjectId(userId) }, { $set: { image } });
+}
+
 export async function setPassword(userId: string, newPassword: string, currentPassword?: string) {
   const users = await usersCollection();
   const user = await users.findOne({ _id: new ObjectId(userId) });

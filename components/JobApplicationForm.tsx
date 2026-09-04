@@ -76,7 +76,7 @@ export function JobApplicationForm({
       )}
 
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-gray-900">Company & Role</legend>
+        <legend className="text-sm font-semibold text-stone-900">Company & Role</legend>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Company name" required>
             <input
@@ -145,7 +145,7 @@ export function JobApplicationForm({
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-gray-900">Application</legend>
+        <legend className="text-sm font-semibold text-stone-900">Application</legend>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Date applied" required>
             <input
@@ -201,7 +201,7 @@ export function JobApplicationForm({
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-gray-900">Compensation</legend>
+        <legend className="text-sm font-semibold text-stone-900">Compensation</legend>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
           <Field label="Salary range min">
             <input
@@ -241,7 +241,7 @@ export function JobApplicationForm({
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-gray-900">Contact & Resume</legend>
+        <legend className="text-sm font-semibold text-stone-900">Contact & Resume</legend>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Contact name">
             <input
@@ -287,7 +287,7 @@ export function JobApplicationForm({
               checked={values.coverLetterUsed ?? false}
               onChange={(e) => set("coverLetterUsed", e.target.checked)}
             />
-            <label htmlFor="coverLetterUsed" className="text-sm text-gray-700">
+            <label htmlFor="coverLetterUsed" className="text-sm text-stone-700">
               Cover letter submitted
             </label>
           </div>
@@ -295,7 +295,7 @@ export function JobApplicationForm({
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-gray-900">Notes</legend>
+        <legend className="text-sm font-semibold text-stone-900">Notes</legend>
         <Field label="Rejection reason (if applicable)">
           <input
             className="input"
@@ -333,7 +333,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-gray-700">
+      <span className="text-sm font-medium text-stone-700">
         {label}
         {required && <span className="text-red-500"> *</span>}
       </span>

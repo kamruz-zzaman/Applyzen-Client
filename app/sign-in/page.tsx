@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { Logo } from "@/components/Logo";
 import { useEffect, useState, type FormEvent } from "react";
 import { OAuthButtons, PasskeySignInButton } from "@/components/AuthProviderButtons";
 import { armConditionalPasskeySignIn } from "@/lib/passkey-autofill";
@@ -35,13 +36,13 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-gray-50 px-4 py-12">
-      <Link href="/" className="mb-8 text-lg font-semibold tracking-tight text-gray-900">
-        Job Application Tracker
+    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-stone-50 px-4 py-12">
+      <Link href="/" className="mb-8">
+        <Logo />
       </Link>
 
-      <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-        <h1 className="mb-6 text-center text-xl font-semibold text-gray-900">Welcome back</h1>
+      <div className="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-8">
+        <h1 className="mb-6 text-center text-xl font-semibold text-stone-900">Welcome back</h1>
 
         <OAuthButtons />
 
@@ -50,10 +51,10 @@ export default function SignInPage() {
           <PasskeySignInButton onError={setError} />
         </div>
 
-        <div className="my-6 flex items-center gap-3 text-xs text-gray-400">
-          <div className="h-px flex-1 bg-gray-200" />
+        <div className="my-6 flex items-center gap-3 text-xs text-stone-400">
+          <div className="h-px flex-1 bg-stone-200" />
           or
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 bg-stone-200" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -81,9 +82,9 @@ export default function SignInPage() {
         </form>
       </div>
 
-      <p className="mt-6 text-center text-sm text-gray-500">
+      <p className="mt-6 text-center text-sm text-stone-500">
         Don&apos;t have an account?{" "}
-        <Link href="/sign-up" className="font-medium text-indigo-600 hover:text-indigo-500">
+        <Link href="/sign-up" className="font-medium text-amber-600 hover:text-amber-500">
           Sign up
         </Link>
       </p>
