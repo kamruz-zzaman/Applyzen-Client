@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { SignJWT } from "jose";
 import { auth } from "@/auth";
+import { mintApiToken } from "@/lib/mint-api-token";
 
 // Mints a short-lived, plainly-signed JWT for the Express API to verify.
 // Auth.js's own session cookie is an encrypted JWE meant only for itself,
@@ -11,17 +11,10 @@ export async function GET() {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const secret = process.env.AUTH_SECRET;
-  if (!secret) {
+  try {
+    const token = await mintApiToken(session.user.id);
+    return NextResponse.json({ token });
+  } catch {
     return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
   }
-
-  const token = await new SignJWT({})
-    .setProtectedHeader({ alg: "HS256" })
-    .setSubject(session.user.id)
-    .setIssuedAt()
-    .setExpirationTime("15m")
-    .sign(new TextEncoder().encode(secret));
-
-  return NextResponse.json({ token });
 }

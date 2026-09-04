@@ -37,7 +37,9 @@ export function buildAuthAdapter(): Adapter {
 
     async createAuthenticator(authenticator) {
       const database = await db();
-      await database.collection(AUTHENTICATORS_COLLECTION).insertOne({ ...authenticator });
+      await database
+        .collection(AUTHENTICATORS_COLLECTION)
+        .insertOne({ ...authenticator, createdAt: new Date() });
       return authenticator;
     },
 

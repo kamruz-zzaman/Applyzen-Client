@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useEffect, useState, type FormEvent } from "react";
-import { OAuthButtons } from "@/components/AuthProviderButtons";
+import { OAuthButtons, PasskeySignInButton } from "@/components/AuthProviderButtons";
 import { armConditionalPasskeySignIn } from "@/lib/passkey-autofill";
 
 export default function SignInPage() {
@@ -12,9 +12,9 @@ export default function SignInPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Arms the browser's native passkey autofill on the email field below —
-  // same pattern GitHub/Google use. No button; picking a suggestion signs in
-  // silently. No-ops if the browser doesn't support it.
+  // Also silently arms the browser's native autofill suggestion on the email
+  // field, for anyone whose browser supports it — a bonus shortcut, not the
+  // only way in. The button below is the primary, discoverable path.
   useEffect(() => {
     armConditionalPasskeySignIn("/dashboard").catch(() => {});
   }, []);
@@ -45,6 +45,11 @@ export default function SignInPage() {
 
         <OAuthButtons />
 
+        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+        <div className="mt-2">
+          <PasskeySignInButton onError={setError} />
+        </div>
+
         <div className="my-6 flex items-center gap-3 text-xs text-gray-400">
           <div className="h-px flex-1 bg-gray-200" />
           or
@@ -52,7 +57,6 @@ export default function SignInPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <p className="text-sm text-red-600">{error}</p>}
           <input
             type="email"
             required
@@ -75,9 +79,6 @@ export default function SignInPage() {
             {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
-        <p className="mt-4 text-center text-xs text-gray-400">
-          Have a passkey saved for this site? Click into the email field above.
-        </p>
       </div>
 
       <p className="mt-6 text-center text-sm text-gray-500">

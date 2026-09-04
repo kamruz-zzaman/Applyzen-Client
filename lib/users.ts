@@ -23,6 +23,31 @@ export async function findUserByEmail(email: string) {
   return users.findOne({ email: email.toLowerCase() });
 }
 
+export async function findUserById(userId: string) {
+  const users = await usersCollection();
+  return users.findOne({ _id: new ObjectId(userId) });
+}
+
+export async function updateUserName(userId: string, name: string) {
+  const users = await usersCollection();
+  await users.updateOne({ _id: new ObjectId(userId) }, { $set: { name } });
+}
+
+export async function setPassword(userId: string, newPassword: string, currentPassword?: string) {
+  const users = await usersCollection();
+  const user = await users.findOne({ _id: new ObjectId(userId) });
+  if (!user) throw new Error("User not found");
+
+  if (user.passwordHash) {
+    if (!currentPassword) throw new Error("Current password is required");
+    const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!valid) throw new Error("Current password is incorrect");
+  }
+
+  const passwordHash = await bcrypt.hash(newPassword, 12);
+  await users.updateOne({ _id: new ObjectId(userId) }, { $set: { passwordHash } });
+}
+
 export async function createUserWithPassword(email: string, password: string, name?: string) {
   const users = await usersCollection();
   const existing = await findUserByEmail(email);
