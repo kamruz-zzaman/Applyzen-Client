@@ -121,6 +121,17 @@ export default function LandingPage() {
 
       <footer className="border-t border-stone-200 py-6 text-center text-sm text-stone-500">
         Applyzen — free to use, your data stays yours.
+        <br className="sm:hidden" />
+        <span className="hidden sm:inline"> · </span>
+        Built by{" "}
+        <a
+          href="https://www.kamruz.xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-stone-700 hover:text-amber-600"
+        >
+          Kamruz Zaman
+        </a>
       </footer>
     </div>
   );
