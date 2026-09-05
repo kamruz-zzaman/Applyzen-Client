@@ -89,12 +89,7 @@ export default function ApplicationsPage() {
         </Link>
       </div>
 
-      {error && (
-        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
-          {error}. Is the API server running at{" "}
-          <code>{process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000"}</code>?
-        </div>
-      )}
+      {error && <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">{error}</div>}
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-1 gap-3">

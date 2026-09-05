@@ -52,12 +52,7 @@ export default function DashboardPage() {
         </Link>
       </div>
 
-      {error && (
-        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
-          {error}. Is the API server running at{" "}
-          <code>{process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000"}</code>?
-        </div>
-      )}
+      {error && <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">{error}</div>}
 
       {stats && <StatsCards stats={stats} applications={applications} />}
 

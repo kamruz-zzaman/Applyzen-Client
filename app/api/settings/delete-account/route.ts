@@ -2,9 +2,8 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { clientPromise } from "@/lib/mongodb";
-import { mintApiToken } from "@/lib/mint-api-token";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+import { dbPromise } from "@/lib/db";
+import { JobApplicationModel } from "@/lib/models/JobApplication";
 
 export async function POST() {
   const session = await auth();
@@ -14,14 +13,8 @@ export async function POST() {
   const userId = session.user.id;
 
   try {
-    const token = await mintApiToken(userId);
-    const res = await fetch(`${API_URL}/api/job-applications`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!res.ok && res.status !== 204) {
-      throw new Error(`Failed to delete job applications (${res.status})`);
-    }
+    await dbPromise;
+    await JobApplicationModel.deleteMany({ userId });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to delete account data";
     return NextResponse.json({ error: message }, { status: 502 });

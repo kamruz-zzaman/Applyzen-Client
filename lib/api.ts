@@ -1,22 +1,8 @@
 import type { JobApplication, JobApplicationInput, StatsResponse } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-
-async function getApiToken(): Promise<string> {
-  const res = await fetch("/api/auth-token");
-  if (!res.ok) throw new Error("Not authenticated");
-  const { token } = (await res.json()) as { token: string };
-  return token;
-}
-
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const token = await getApiToken();
-
-  const res = await fetch(`${API_URL}/api/job-applications${path}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+  const res = await fetch(`/api/job-applications${path}`, {
+    headers: { "Content-Type": "application/json" },
     ...options,
   });
 
