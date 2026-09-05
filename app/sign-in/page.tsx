@@ -3,11 +3,26 @@
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Logo } from "@/components/Logo";
-import { useEffect, useState, type FormEvent } from "react";
+import { Suspense, useEffect, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { OAuthButtons, PasskeySignInButton } from "@/components/AuthProviderButtons";
 import { armConditionalPasskeySignIn } from "@/lib/passkey-autofill";
 
-export default function SignInPage() {
+// Auth.js redirects back here with ?error=<code> on OAuth/callback failures —
+// these codes are meant for logs, not users, so map the ones we can hit to
+// plain language instead of leaving the raw code sitting in the URL unexplained.
+const ERROR_MESSAGES: Record<string, string> = {
+  OAuthAccountNotLinked:
+    "That email is already used with a different sign-in method. Try signing in the way you originally created your account.",
+  OAuthSignin: "Something went wrong connecting to that provider. Please try again.",
+  OAuthCallback: "Something went wrong connecting to that provider. Please try again.",
+  AccessDenied: "Access was denied.",
+  Configuration: "Something's misconfigured on our end. Please try again later.",
+  CredentialsSignin: "Invalid email or password.",
+};
+
+function SignInForm() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +34,11 @@ export default function SignInPage() {
   useEffect(() => {
     armConditionalPasskeySignIn("/dashboard").catch(() => {});
   }, []);
+
+  useEffect(() => {
+    const code = searchParams.get("error");
+    if (code) setError(ERROR_MESSAGES[code] ?? "Something went wrong signing you in. Please try again.");
+  }, [searchParams]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -89,5 +109,13 @@ export default function SignInPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense>
+      <SignInForm />
+    </Suspense>
   );
 }
