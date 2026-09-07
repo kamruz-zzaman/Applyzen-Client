@@ -39,7 +39,18 @@ export function PasskeySignInButton({ onError }: { onError: (message: string) =>
   async function handleClick() {
     setLoading(true);
     try {
-      await signInWithPasskey("passkey", { callbackUrl: "/dashboard" });
+      // redirect: false is required here — the default (true) makes next-auth
+      // hard-navigate to Auth.js's raw /api/auth/error page on failure (e.g. a
+      // passkey your browser remembers but the server has no record of),
+      // bypassing this component's error handling entirely.
+      const result = await signInWithPasskey("passkey", { callbackUrl: "/dashboard", redirect: false });
+      if (result?.error) {
+        onError(
+          "That passkey isn't recognized for any account here. Try a different sign-in method, or add a fresh passkey from Settings once you're signed in."
+        );
+        return;
+      }
+      window.location.href = result?.url ?? "/dashboard";
     } catch {
       onError("Passkey sign-in failed or was cancelled.");
     } finally {
